@@ -1,22 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using SingularSystemKiosk.Data;
-using SingularSystemKiosk.Models;
-
+﻿
 namespace SingularSystemKiosk.Controllers
 {
-    public class BaseController : ControllerBase
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using SingularSystemKiosk.Data;
+    using SingularSystemKiosk.Models;
+
+    public class BaseController : ControllerBase// Classes are in pascal
     {
-        protected readonly AppDbContext _appDbContext;
+        protected readonly AppDbContext _appDbContext; //prtected is camelCase
         protected readonly UserManager<AppUser> _userManager;
         protected readonly SignInManager<AppUser> _signInManager;
         protected readonly RoleManager<IdentityRole> _roleManager;
 
-        public BaseController(
-            AppDbContext appDbContext,
-            UserManager<AppUser> userManager,
-            SignInManager<AppUser> signInManager,
-            RoleManager<IdentityRole> roleManager)
+        public BaseController(AppDbContext appDbContext, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)// spaces after each comma
         {
             _appDbContext = appDbContext;
             _userManager = userManager;

@@ -1,7 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
 
 namespace SingularSystemKiosk.Models
 {
+    using System.ComponentModel.DataAnnotations;
     public class CartItem
     {
         [Key]
@@ -15,8 +16,6 @@ namespace SingularSystemKiosk.Models
 
         public int Quantity { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
 
     }
 }

@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using SingularSystemKiosk.Data;
-using SingularSystemKiosk.Dtos;
-using SingularSystemKiosk.Models;
-
+﻿
 namespace SingularSystemKiosk.Controllers
 {
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using SingularSystemKiosk.Data;
+    using SingularSystemKiosk.Dtos.UserDto;
+    using SingularSystemKiosk.Models;
+
     public class UserController : BaseController
     {
         public UserController(
@@ -30,15 +31,20 @@ namespace SingularSystemKiosk.Controllers
 
             return Ok(new { Message = "Logged in Successfully" });
         }
+
+
+
+
+
         [HttpPost, Route("Register")]
         public async Task<IActionResult> Registration(UserRegistrationDto registerDTO)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var existinguser = await _userManager.FindByEmailAsync(registerDTO.Email);
+            var existingUser = await _userManager.FindByEmailAsync(registerDTO.Email);
 
-            if (existinguser!=null)
+            if (existingUser!=null)
             {
                     return BadRequest("This email already exists");
             }
@@ -70,18 +76,19 @@ namespace SingularSystemKiosk.Controllers
                     var result = await _userManager.CreateAsync(appUser, registerDTO.Password);
 
 
-                    if (result.Succeeded) {
+                    if (!result.Succeeded) {
 
 
-
-                    await _userManager.AddToRoleAsync(appUser, "Customer");
-                    return Ok("You have successfully registered");
-                    
-                    }
+                    return BadRequest(new { error = "Registration Failed", details = result.Errors });
 
 
+                }
 
-                return Ok(result);
+                await _userManager.AddToRoleAsync(appUser, "Customer");
+                return CreatedAtAction(nameof(Login), new { email = appUser.Email }, new { Message = "User registered successfully" });
+
+
+              
 
             
             

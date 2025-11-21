@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using SingularSystemKiosk.Models;
-
+﻿
 namespace SingularSystemKiosk.Data
 {
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using SingularSystemKiosk.Models;
+
     public class AppDbContext:IdentityDbContext<AppUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
@@ -20,7 +21,7 @@ namespace SingularSystemKiosk.Data
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
 
-       
+        public DbSet<Supplier> Supplier { get; set; }
         public DbSet<Orders> Orders { get; set; }
         public DbSet<OrderedItems> OrderedItems { get; set; }
         public DbSet<PaymentTransaction> Transaction { get; set; }

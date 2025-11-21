@@ -1,12 +1,13 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using SingularSystemKiosk.Controllers;
-using SingularSystemKiosk.Models;
-using BCrypt.Net;
-using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace SingularSystemKiosk.Data
 {
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
+    using SingularSystemKiosk.Controllers;
+    using SingularSystemKiosk.Models;
+    using BCrypt.Net;
+    using Microsoft.AspNetCore.Mvc;
+
     public class  Seed:BaseController
     {
 
